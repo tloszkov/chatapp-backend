@@ -1,0 +1,36 @@
+version: "3.1"
+
+services:
+    mongo:
+        image: mongo:8.0-rc-jammy
+        restart: always
+        container_name: ChatApp-MongoDb
+        ports:
+            - "27017:27017"
+            - "30000:30000"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: tloszkov
+            MONGO_INITDB_ROOT_PASSWORD: alma
+            MONGO_INITDB_DATABASE: ChatApp
+        volumes:
+            - ./db_data/:/data/db/
+#        healthcheck:
+#          test: [ "CMD-SHELL", "mongo --quiet --eval 'rs.status()' || exit 1" ]
+#          interval: 10s
+#          timeout: 5s
+#          retries: 5
+
+    mongo-express:
+        image: mongo-express
+        restart: always
+        container_name: ChatApp-Mongo-express
+        ports:
+            - "8081:8081"
+            - "8090:8090"
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: tloszkov
+            ME_CONFIG_MONGODB_ADMINPASSWORD: alma
+            ME_CONFIG_MONGODB_ADMINDATABASE: ChatApp
+            ME_CONFIG_MONGODB_SERVER: mongodb://tloszkov:alma@mongo:27017/?authSource=admin
+        depends_on:
+            - mongo
