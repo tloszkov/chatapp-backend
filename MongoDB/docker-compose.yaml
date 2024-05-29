@@ -13,17 +13,4 @@ services:
         env_file:
             -   .env
 
-    mongo-express:
-        image: mongo-express
-        ports:
-            - '8081:8081'
-        container_name: ChatApp-MongoDB-Express
-        restart: unless-stopped
-        environment:
-            - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_INITDB_ROOT_USERNAME}
-            - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-            - ME_CONFIG_MONGODB_SERVER=mongo
-        depends_on:
-            - mongo
-        env_file:
-            -   .env
+
