@@ -7,13 +7,17 @@
 - seen
 - liked
 - disliked
+- deleted
 
-### Group message
+### Channel
 - channel_id
-- message_id
 - user_id
 - content
+- created_by
 - created_at
+- liked
+- disliked
+- deleted
 
 ### User
 - user_id
@@ -22,6 +26,7 @@
 - email
 - password
 - created_at
+- deleted
 
 ### Message board
 - messageboard_id
@@ -30,3 +35,4 @@
 - liked
 - disliked
 - created_at
+- deleted
