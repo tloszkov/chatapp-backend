@@ -12,5 +12,3 @@ services:
             - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
         env_file:
             -   .env
-
-
