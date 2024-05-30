@@ -1,0 +1,13 @@
+GET http://localhost:8090/api/v1/message
+
+###
+GET http://localhost:8090/api/v1/message/2
+
+###
+POST http://localhost:8090/api/v1/message
+
+###
+PATCH http://localhost:8090/api/v1/message/2
+
+###
+DELETE http://localhost:8090/api/v1/message/2

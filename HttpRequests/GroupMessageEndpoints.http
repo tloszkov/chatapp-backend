@@ -1,0 +1,13 @@
+GET http://localhost:8090/api/v1/groupmessage
+
+###
+GET http://localhost:8090/api/v1/groupmessage/2
+
+###
+POST http://localhost:8090/api/v1/groupmessage
+
+###
+PATCH http://localhost:8090/api/v1/groupmessage/2
+
+###
+DELETE http://localhost:8090/api/v1/groupmessage/2
