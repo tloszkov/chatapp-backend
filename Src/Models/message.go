@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func MessageModel() {
 	type Message struct {
 		ID          primitive.ObjectID ` bson:"_id,omitempty"`
 		MessageFrom string             `bson:"messageFrom"`

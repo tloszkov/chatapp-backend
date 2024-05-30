@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func GroupMessageModel() {
 	type Channel struct {
 		ID          primitive.ObjectID `bson:"_id,omitempty"`
 		MessageFrom primitive.ObjectID `bson:"messageFrom"`
