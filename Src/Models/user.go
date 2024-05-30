@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func UserModel() {
 	type Message struct {
 		ID        primitive.ObjectID ` bson:"_id,omitempty"`
 		FirstName string             `bson:"firstName"`

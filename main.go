@@ -1,17 +1,19 @@
 package main
 
 import (
+	"ChatApp/Src/Routes"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	fmt.Println("Hello, World!")
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello, World!",
-		})
-	})
-	r.Run(":8090")
+	router := gin.Default()
+
+	Routes.UserRoutes(router)
+	Routes.MessageRoutes(router)
+	Routes.GroupMessageRoutes(router)
+	Routes.MessageBoardRoutes(router)
+
+	router.Run(":8090")
 }
