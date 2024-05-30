@@ -1,0 +1,13 @@
+GET http://localhost:8090/api/v1/boardmessage
+
+###
+GET http://localhost:8090/api/v1/boardmessage/2
+
+###
+POST http://localhost:8090/api/v1/boardmessage
+
+###
+PATCH http://localhost:8090/api/v1/boardmessage/2
+
+###
+DELETE http://localhost:8090/api/v1/boardmessage/2
