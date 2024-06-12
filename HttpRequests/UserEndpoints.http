@@ -1,13 +1,30 @@
 GET http://localhost:8090/api/v1/user
 
 ###
-GET http://localhost:8090/api/v1/user/2
+GET http://localhost:8090/api/v1/user/66682ebf22987b65aaac2320
 
 ###
 POST http://localhost:8090/api/v1/user
+Content-Type: application/json
+
+{
+  "firstName": "Joe",
+  "lastName": "Smith",
+  "email": "joesmith@example.com",
+  "password": "ppp***"
+}
 
 ###
-PATCH http://localhost:8090/api/v1/user/2
+PATCH http://localhost:8090/api/v1/user/66682ebf22987b65aaac2320
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@example.com",
+  "password": "password123",
+  "deleted": true
+}
 
 ###
-DELETE http://localhost:8090/api/v1/user/2
+DELETE http://localhost:8090/api/v1/user/666a174b77622d1ac578e263

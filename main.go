@@ -11,13 +11,15 @@ func main() {
 	fmt.Println("Hello, World!")
 	router := gin.Default()
 
-	Routes.UserRoutes(router)
+	DBConnector.ConnectToMongo()
+	defer DBConnector.DisconnectFromMongo()
+	client := DBConnector.GetMongoClient()
+
+	Routes.UserRoutes(router, client)
 	Routes.MessageRoutes(router)
 	Routes.GroupMessageRoutes(router)
 	Routes.MessageBoardRoutes(router)
 
-	DBConnector.ConnectToMongo()
-	DBConnector.DisconnectFromMongo()
-
 	router.Run(":8090")
+
 }
