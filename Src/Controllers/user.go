@@ -72,7 +72,6 @@ func AddUser(c *gin.Context, collection *mongo.Collection) {
 		return
 	}
 
-	// Hash password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newUser.Password), bcrypt.DefaultCost)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to hash password"})
@@ -163,7 +162,6 @@ func UpdateUser(c *gin.Context, collection *mongo.Collection) {
 }
 
 func DeleteUserById(c *gin.Context, collection *mongo.Collection) {
-	// Retrieve the user ID from the URL parameter
 	userIDParam := c.Param("id")
 	userID, err := primitive.ObjectIDFromHex(userIDParam)
 	if err != nil {
