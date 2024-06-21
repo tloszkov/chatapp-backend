@@ -1,13 +1,27 @@
 GET http://localhost:8090/api/v1/boardmessage
 
 ###
-GET http://localhost:8090/api/v1/boardmessage/2
+GET http://localhost:8090/api/v1/boardmessage/6675422ba91bc71c5e1837f3
 
 ###
 POST http://localhost:8090/api/v1/boardmessage
+Content-Type: application/json
+
+{
+  "content": "Hi hello szia!",
+  "messageFrom": "66682ebf22987b65aaac2320"
+}
 
 ###
-PATCH http://localhost:8090/api/v1/boardmessage/2
+PATCH http://localhost:8090/api/v1/boardmessage/6675422ba91bc71c5e1837f3
+Content-Type: application/json
 
+{
+  "content": "Hi helddlo szia!",
+  "messageFrom": "66682ebf22987b65aaac2321",
+  "disliked": 1,
+  "liked": 3,
+  "deleted": true
+}
 ###
-DELETE http://localhost:8090/api/v1/boardmessage/2
+DELETE http://localhost:8090/api/v1/boardmessage/66754bcd631a6b42e96093fd
