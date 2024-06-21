@@ -18,7 +18,7 @@ func main() {
 	Routes.UserRoutes(router, client)
 	Routes.MessageRoutes(router)
 	Routes.GroupMessageRoutes(router)
-	Routes.MessageBoardRoutes(router)
+	Routes.MessageBoardRoutes(router, client)
 
 	router.Run(":8090")
 
