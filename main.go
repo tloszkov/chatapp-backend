@@ -16,7 +16,7 @@ func main() {
 	client := DBConnector.GetMongoClient()
 
 	Routes.UserRoutes(router, client)
-	Routes.MessageRoutes(router)
+	Routes.MessageRoutes(router, client)
 	Routes.GroupMessageRoutes(router)
 	Routes.MessageBoardRoutes(router, client)
 
