@@ -1,13 +1,35 @@
 GET http://localhost:8090/api/v1/message
 
 ###
-GET http://localhost:8090/api/v1/message/2
+GET http://localhost:8090/api/v1/message/667a874f620cd504960e3197
 
 ###
 POST http://localhost:8090/api/v1/message
+Content-Type: application/json
+
+{
+  "messageFrom": "666a0b4a45a3e348d2da5575",
+  "messageTo": "66682ed822987b65aaac232a",
+  "content": "Hello, this is another new message",
+  "seen": false,
+  "liked": 0,
+  "disliked": 0,
+  "deleted": false
+}
 
 ###
-PATCH http://localhost:8090/api/v1/message/2
+PATCH http://localhost:8090/api/v1/message/667a874f620cd504960e3197
+Content-Type: application/json
+
+{
+  "messageFrom": "666a0b4a45a3e348d2da5575",
+  "messageTo": "66682ed822987b65aaac232a",
+  "content": "Hello, this is a new message",
+  "seen": true,
+  "disliked": 12,
+  "deleted": false
+}
+
 
 ###
 DELETE http://localhost:8090/api/v1/message/2

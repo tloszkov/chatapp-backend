@@ -2,32 +2,32 @@ package Controllers
 
 import "github.com/gin-gonic/gin"
 
-func GetAllMessages(c *gin.Context) {
+func GetAllGroupMessages(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "All group messages!",
+		"message": "All messages!",
 	})
 }
 
-func GetMessageById(c *gin.Context) {
+func GetGroupMessageById(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Get a group message by id!",
+		"message": "Get message by id!",
 	})
 }
 
-func AddMessage(c *gin.Context) {
+func AddGroupMessage(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Group message added!",
+		"message": "Message added!",
 	})
 }
 
-func UpdateMessage(c *gin.Context) {
+func UpdateGroupMessage(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Group message updated!",
+		"message": "Message updated!",
 	})
 }
 
-func DeleteMessage(c *gin.Context) {
+func DeleteGroupMessage(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"message": "Group message deleted!",
+		"message": "Message deleted!",
 	})
 }
