@@ -3,12 +3,10 @@ package main
 import (
 	"ChatApp/Src/DBConnector"
 	"ChatApp/Src/Routes"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	fmt.Println("Hello, World!")
 	router := gin.Default()
 
 	DBConnector.ConnectToMongo()
@@ -17,7 +15,7 @@ func main() {
 
 	Routes.UserRoutes(router, client)
 	Routes.MessageRoutes(router, client)
-	Routes.GroupMessageRoutes(router)
+	Routes.GroupMessageRoutes(router, client)
 	Routes.MessageBoardRoutes(router, client)
 
 	router.Run(":8090")
