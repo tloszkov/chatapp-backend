@@ -1,13 +1,30 @@
 GET http://localhost:8090/api/v1/groupmessage
 
 ###
-GET http://localhost:8090/api/v1/groupmessage/2
+GET http://localhost:8090/api/v1/groupmessage/667a93f0f1d8971dd6553f6f
 
 ###
 POST http://localhost:8090/api/v1/groupmessage
+Content-Type: application/json
+
+{
+  "content": "Message 9 content",
+  "createdBy": "60d16f6b2f74b643f15e17f9",
+  "liked": 0,
+  "disliked": 0,
+  "deleted": false
+}
 
 ###
-PATCH http://localhost:8090/api/v1/groupmessage/2
+PATCH http://localhost:8090/api/v1/groupmessage/667a93f0f1d8971dd6553f6f
+Content-Type: application/json
+
+{
+  "content": "Message",
+  "liked": 100,
+  "disliked": 5,
+  "deleted": false
+}
 
 ###
 DELETE http://localhost:8090/api/v1/groupmessage/2
