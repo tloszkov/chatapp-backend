@@ -1,4 +1,4 @@
-package Controllers
+package User_Controller
 
 import (
 	"ChatApp/Src/Models"
@@ -65,7 +65,7 @@ func GetMessageById(c *gin.Context, collection *mongo.Collection) {
 }
 
 func GetMessagesPing(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"message": "Message API is up and running!"})
+	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
 func AddMessage(c *gin.Context, collection *mongo.Collection) {

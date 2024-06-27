@@ -1,4 +1,4 @@
-package Controllers
+package User_Controller
 
 import (
 	"ChatApp/Src/Models"
@@ -80,7 +80,7 @@ func GetGroupMessageById(c *gin.Context, collection *mongo.Collection) {
 }
 
 func GetGroupMessagesPing(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"message": "Group Message API is up and running!"})
+	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
 func AddGroupMessage(c *gin.Context, collection *mongo.Collection) {

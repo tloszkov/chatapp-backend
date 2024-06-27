@@ -1,7 +1,7 @@
 package Routes
 
 import (
-	"ChatApp/Src/Controllers"
+	Controllers "ChatApp/Src/Controllers"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 )
