@@ -64,6 +64,10 @@ func GetMessageById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, message)
 }
 
+func GetMessagesPing(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "Message API is up and running!"})
+}
+
 func AddMessage(c *gin.Context, collection *mongo.Collection) {
 	var newMessage Models.Message
 	if err := c.ShouldBindJSON(&newMessage); err != nil {
