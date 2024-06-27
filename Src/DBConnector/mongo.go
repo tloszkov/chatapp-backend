@@ -25,7 +25,7 @@ func LoadEnv() string {
 	return ""
 }
 func ConnectToMongo() error {
-	const uri = "mongodb://localhost:27017"
+	//const uri = "mongodb://localhost:27017"
 	serverApi := options.ServerAPI(options.ServerAPIVersion1)
 	opts := options.Client().ApplyURI(LoadEnv()).SetServerAPIOptions(serverApi)
 

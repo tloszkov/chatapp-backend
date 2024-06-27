@@ -1,4 +1,4 @@
-package Controllers
+package User_Controller
 
 import (
 	"ChatApp/Src/Models"
@@ -31,7 +31,16 @@ func GetAllUsers(c *gin.Context, collection *mongo.Collection) {
 		return
 	}
 
-	c.JSON(http.StatusOK, items)
+	count, err := collection.CountDocuments(context.Background(), bson.D{})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"message": "Error counting documents",
+			"error":   err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"users": items, "count": count})
 }
 
 func GetUserById(c *gin.Context, collection *mongo.Collection) {
@@ -66,7 +75,7 @@ func GetUserById(c *gin.Context, collection *mongo.Collection) {
 }
 
 func GetUserPing(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"message": "Users API is up and running!"})
+	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
 func AddUser(c *gin.Context, collection *mongo.Collection) {
