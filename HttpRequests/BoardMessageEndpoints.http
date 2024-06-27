@@ -4,6 +4,9 @@ GET http://localhost:8090/api/v1/boardmessage
 GET http://localhost:8090/api/v1/boardmessage/6675422ba91bc71c5e1837f3
 
 ###
+GET http://localhost:8090/api/v1/boardmessage/ping/
+
+###
 POST http://localhost:8090/api/v1/boardmessage
 Content-Type: application/json
 

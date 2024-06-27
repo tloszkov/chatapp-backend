@@ -12,6 +12,7 @@ func UserRoutes(router *gin.Engine, mongoClient *mongo.Client) {
 
 	v1.GET("/user", getAllUsersHandler(collection))
 	v1.GET("/user/:id", getUserByIdHandler(collection))
+	v1.GET("/user/ping/", getUserPingHandler())
 	v1.POST("/user", addUserHandler(collection))
 	v1.PATCH("/user/:id", updateUserHandler(collection))
 	v1.DELETE("/user/:id", deleteUserByIdHandler(collection))
@@ -44,5 +45,11 @@ func updateUserHandler(collection *mongo.Collection) gin.HandlerFunc {
 func addUserHandler(collection *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		Controllers.AddUser(c, collection)
+	}
+}
+
+func getUserPingHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		Controllers.GetUserPing(c)
 	}
 }

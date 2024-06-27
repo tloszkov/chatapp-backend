@@ -79,6 +79,10 @@ func GetGroupMessageById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, message)
 }
 
+func GetGroupMessagesPing(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "Group Message API is up and running!"})
+}
+
 func AddGroupMessage(c *gin.Context, collection *mongo.Collection) {
 	var newGroupMessage Models.GroupMessage
 	if err := c.ShouldBindJSON(&newGroupMessage); err != nil {

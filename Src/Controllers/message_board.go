@@ -65,6 +65,10 @@ func GetBoardMessageById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, messageBoard)
 }
 
+func GetMessagesBoardPing(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "Message Board API is up and running!"})
+}
+
 func AddBoardMessage(c *gin.Context, collection *mongo.Collection) {
 	var newMessageBoard Models.MessageBoard
 	if err := c.BindJSON(&newMessageBoard); err != nil {

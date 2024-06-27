@@ -4,6 +4,9 @@ GET http://localhost:8090/api/v1/groupmessage
 GET http://localhost:8090/api/v1/groupmessage/667a93f0f1d8971dd6553f6f
 
 ###
+GET http://localhost:8090/api/v1/groupmessage/ping/
+
+###
 POST http://localhost:8090/api/v1/groupmessage
 Content-Type: application/json
 

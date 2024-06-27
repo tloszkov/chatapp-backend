@@ -12,6 +12,7 @@ func GroupMessageRoutes(router *gin.Engine, mongoClient *mongo.Client) {
 
 	v1.GET("/groupmessage", getAllGroupMessageHandler(collection))
 	v1.GET("/groupmessage/:id", getGroupMessageById(collection))
+	v1.GET("/groupmessage/ping/", getGroupMessagesPingHandler())
 	v1.POST("/groupmessage", addGroupMessage(collection))
 	v1.PATCH("/groupmessage/:id", updateGroupMessage(collection))
 	v1.DELETE("/groupmessage/:id", deleteGroupMessage(collection))
@@ -44,5 +45,11 @@ func updateGroupMessage(collection *mongo.Collection) gin.HandlerFunc {
 func deleteGroupMessage(collection *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		Controllers.DeleteGroupMessage(c, collection)
+	}
+}
+
+func getGroupMessagesPingHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		Controllers.GetGroupMessagesPing(c)
 	}
 }

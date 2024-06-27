@@ -12,6 +12,7 @@ func MessageBoardRoutes(router *gin.Engine, mongoClient *mongo.Client) {
 
 	v1.GET("/boardmessage", getAllBoardMessages(collection))
 	v1.GET("/boardmessage/:id", getBoardMessageById(collection))
+	v1.GET("/boardmessage/ping/", getBoardMessagesPingHandler())
 	v1.POST("/boardmessage", addBoardMessage(collection))
 	v1.PATCH("/boardmessage/:id", updateBoardMessage(collection))
 	v1.DELETE("/boardmessage/:id", deleteBoardMessage(collection))
@@ -45,5 +46,11 @@ func updateBoardMessage(collection *mongo.Collection) gin.HandlerFunc {
 func deleteBoardMessage(collection *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		Controllers.DeleteBoardMessageById(c, collection)
+	}
+}
+
+func getBoardMessagesPingHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		Controllers.GetMessagesBoardPing(c)
 	}
 }

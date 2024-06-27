@@ -65,6 +65,10 @@ func GetUserById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, user)
 }
 
+func GetUserPing(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "Users API is up and running!"})
+}
+
 func AddUser(c *gin.Context, collection *mongo.Collection) {
 	var newUser Models.User
 	if err := c.BindJSON(&newUser); err != nil {

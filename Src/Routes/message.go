@@ -12,6 +12,7 @@ func MessageRoutes(router *gin.Engine, mongoClient *mongo.Client) {
 
 	v1.GET("/message", getAllMessageHandler(collection))
 	v1.GET("/message/:id", getMessageById(collection))
+	v1.GET("/message/ping/", getMessagesPingHandler())
 	v1.POST("/message", addMessageHandler(collection))
 	v1.PATCH("/message/:id", updateMessageHandler(collection))
 	v1.DELETE("/message/:id", deleteMessageByIdHandler(collection))
@@ -44,5 +45,11 @@ func updateMessageHandler(collection *mongo.Collection) gin.HandlerFunc {
 func deleteMessageByIdHandler(collection *mongo.Collection) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		Controllers.DeleteMessage(c, collection)
+	}
+}
+
+func getMessagesPingHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		Controllers.GetMessagesPing(c)
 	}
 }
