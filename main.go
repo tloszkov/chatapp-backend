@@ -2,12 +2,14 @@ package main
 
 import (
 	"ChatApp/Src/DBConnector"
+	"ChatApp/Src/Middleware"
 	"ChatApp/Src/Routes"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
+	router.Use(middleware.CorsPolicy)
 
 	DBConnector.ConnectToMongo()
 	defer DBConnector.DisconnectFromMongo()
