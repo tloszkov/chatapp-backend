@@ -2,3 +2,6 @@ MongoDB/.env
 /Logs
 /MongoDB/data/MongoDB/db_data/
 
+/MongoDB/
+/MongoDB/db_data/
+/MongoDB/data/
