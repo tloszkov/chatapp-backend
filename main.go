@@ -16,6 +16,7 @@ func main() {
 
 	router.Use(middleware.LoggerMiddleware(logger))
 	router.Use(middleware.AuthMiddleware())
+	router.Use(middleware.RateLimitMiddleware())
 
 	DBConnector.ConnectToMongo()
 	defer DBConnector.DisconnectFromMongo()
