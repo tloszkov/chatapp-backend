@@ -12,6 +12,12 @@ import (
 	"time"
 )
 
+// @Summary Get all users
+// @ID GetAllUsers
+// @Tags user
+// @Produce json
+// @Success 200 {object} map[string]string
+// @Router /user [get]
 func GetAllUsers(c *gin.Context, collection *mongo.Collection) {
 	var items []bson.M
 	cursor, err := collection.Find(context.Background(), bson.D{})
@@ -43,6 +49,16 @@ func GetAllUsers(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, gin.H{"users": items, "count": count})
 }
 
+// @Summary Get a user by ID
+// @ID GetUserById
+// @Tags user
+// @Produce json
+// @Param id path string true "User ID"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /user/{id} [get]
 func GetUserById(c *gin.Context, collection *mongo.Collection) {
 	userIDParam := c.Param("id")
 	userID, err := primitive.ObjectIDFromHex(userIDParam)
@@ -74,10 +90,26 @@ func GetUserById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, user)
 }
 
+// @Summary Ping the server
+// @ID GetUserPing
+// @Tags user
+// @Produce json
+// @Success 200 {object} map[string]string
+// @Router /user/ping [get]
 func GetUserPing(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
+// @Summary Add a new user
+// @ID AddUser
+// @Tags user
+// @Produce json
+// @Consume json
+// @Param user body Models.User true "User data"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /user [post]
 func AddUser(c *gin.Context, collection *mongo.Collection) {
 	var newUser Models.User
 	if err := c.BindJSON(&newUser); err != nil {
@@ -105,6 +137,18 @@ func AddUser(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, gin.H{"message": "User added!", "id": result.InsertedID})
 }
 
+// @Summary Update a user by ID
+// @ID UpdateUser
+// @Tags user
+// @Produce json
+// @Consume json
+// @Param id path string true "User ID"
+// @Param user body Models.User true "User data"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /user/{id} [patch]
 func UpdateUser(c *gin.Context, collection *mongo.Collection) {
 	userIDParam := c.Param("id")
 	userID, err := primitive.ObjectIDFromHex(userIDParam)
@@ -174,6 +218,16 @@ func UpdateUser(c *gin.Context, collection *mongo.Collection) {
 	})
 }
 
+// @Summary Delete a user by ID
+// @ID DeleteUserById
+// @Tags user
+// @Produce json
+// @Param id path string true "User ID"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /user/{id} [delete]
 func DeleteUserById(c *gin.Context, collection *mongo.Collection) {
 	userIDParam := c.Param("id")
 	userID, err := primitive.ObjectIDFromHex(userIDParam)

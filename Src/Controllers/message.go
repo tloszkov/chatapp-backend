@@ -12,6 +12,13 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// @Summary Get all messages
+// @ID GetAllMessages
+// @Tags message
+// @Produce json
+// @Success 200 {array} map[string]interface{}
+// @Failure 500 {object} map[string]string
+// @Router /message [get]
 func GetAllMessages(c *gin.Context, collection *mongo.Collection) {
 	var messages []Models.Message
 	cursor, err := collection.Find(context.Background(), bson.M{})
@@ -34,6 +41,16 @@ func GetAllMessages(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, messages)
 }
 
+// @Summary Get a message by ID
+// @ID GetMessageById
+// @Tags message
+// @Produce json
+// @Param id path string true "Message ID"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /message/{id} [get]
 func GetMessageById(c *gin.Context, collection *mongo.Collection) {
 	messageIDParam := c.Param("id")
 	messageID, err := primitive.ObjectIDFromHex(messageIDParam)
@@ -64,10 +81,26 @@ func GetMessageById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, message)
 }
 
+// @Summary Ping the message service
+// @ID GetMessagesPing
+// @Tags message
+// @Produce json
+// @Success 200 {object} map[string]string
+// @Router /message/ping [get]
 func GetMessagesPing(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
+// @Summary Add a new message
+// @ID AddMessage
+// @Tags message
+// @Produce json
+// @Consume json
+// @Param message body Models.Message true "Message data"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /message [post]
 func AddMessage(c *gin.Context, collection *mongo.Collection) {
 	var newMessage Models.Message
 	if err := c.ShouldBindJSON(&newMessage); err != nil {
@@ -115,6 +148,18 @@ func AddMessage(c *gin.Context, collection *mongo.Collection) {
 	})
 }
 
+// @Summary Update a message by ID
+// @ID UpdateMessage
+// @Tags message
+// @Produce json
+// @Consume json
+// @Param id path string true "Message ID"
+// @Param message body Models.Message true "Message data"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /message/{id} [patch]
 func UpdateMessage(c *gin.Context, collection *mongo.Collection) {
 	messageIDParam := c.Param("id")
 	messageID, err := primitive.ObjectIDFromHex(messageIDParam)
@@ -183,6 +228,16 @@ func UpdateMessage(c *gin.Context, collection *mongo.Collection) {
 	})
 }
 
+// @Summary Delete a message by ID
+// @ID DeleteMessageById
+// @Tags message
+// @Produce json
+// @Param id path string true "Message ID"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /message/{id} [delete]
 func DeleteMessage(c *gin.Context, collection *mongo.Collection) {
 	messageIDParam := c.Param("id")
 	messageID, err := primitive.ObjectIDFromHex(messageIDParam)
