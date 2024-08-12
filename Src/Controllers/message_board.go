@@ -12,6 +12,13 @@ import (
 	"time"
 )
 
+// @Summary Get all board messages
+// @ID GetAllBoardMessages
+// @Tags boardmessage
+// @Produce json
+// @Success 200 {array} map[string]interface{}
+// @Failure 500 {object} map[string]string
+// @Router /boardmessage [get]
 func GetAllBoardMessages(c *gin.Context, collection *mongo.Collection) {
 	var items []bson.M
 	cursor, err := collection.Find(context.Background(), bson.D{})
@@ -34,6 +41,16 @@ func GetAllBoardMessages(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, items)
 }
 
+// @Summary Get a board message by ID
+// @ID GetBoardMessageById
+// @Tags boardmessage
+// @Produce json
+// @Param id path string true "Message Board ID"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /boardmessage/{id} [get]
 func GetBoardMessageById(c *gin.Context, collection *mongo.Collection) {
 	messageBoardIDParam := c.Param("id")
 	messageBoardID, err := primitive.ObjectIDFromHex(messageBoardIDParam)
@@ -65,10 +82,26 @@ func GetBoardMessageById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, messageBoard)
 }
 
+// @Summary Ping the message board service
+// @ID GetMessagesBoardPing
+// @Tags boardmessage
+// @Produce json
+// @Success 200 {object} map[string]string
+// @Router /boardmessage/ping [get]
 func GetMessagesBoardPing(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
+// @Summary Add a new board message
+// @ID AddBoardMessage
+// @Tags boardmessage
+// @Produce json
+// @Consume json
+// @Param message body Models.MessageBoard true "Message Board data"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /boardmessage [post]
 func AddBoardMessage(c *gin.Context, collection *mongo.Collection) {
 	var newMessageBoard Models.MessageBoard
 	if err := c.BindJSON(&newMessageBoard); err != nil {
@@ -89,6 +122,18 @@ func AddBoardMessage(c *gin.Context, collection *mongo.Collection) {
 
 }
 
+// @Summary Update a board message by ID
+// @ID UpdateBoardMessage
+// @Tags boardmessage
+// @Produce json
+// @Consume json
+// @Param id path string true "Message Board ID"
+// @Param message body Models.MessageBoard true "Message Board data"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /boardmessage/{id} [patch]
 func UpdateBoardMessage(c *gin.Context, collection *mongo.Collection) {
 	messageBoardIDParam := c.Param("id")
 	messageBoardID, err := primitive.ObjectIDFromHex(messageBoardIDParam)
@@ -153,6 +198,16 @@ func UpdateBoardMessage(c *gin.Context, collection *mongo.Collection) {
 	})
 }
 
+// @Summary Delete a board message by ID
+// @ID DeleteBoardMessageById
+// @Tags boardmessage
+// @Produce json
+// @Param id path string true "Message Board ID"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /boardmessage/{id} [delete]
 func DeleteBoardMessageById(c *gin.Context, collection *mongo.Collection) {
 	messageBoardIDParam := c.Param("id")
 	messageBoardID, err := primitive.ObjectIDFromHex(messageBoardIDParam)

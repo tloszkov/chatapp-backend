@@ -11,6 +11,13 @@ import (
 	"time"
 )
 
+// @Summary Get all group messages
+// @ID GetAllGroupMessages
+// @Tags groupmessage
+// @Produce json
+// @Success 200 {array} map[string]interface{}
+// @Failure 500 {object} map[string]string
+// @Router /groupmessage [get]
 func GetAllGroupMessages(c *gin.Context, collection *mongo.Collection) {
 	var groupMessages []Models.GroupMessage
 
@@ -47,6 +54,16 @@ func GetAllGroupMessages(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, groupMessages)
 }
 
+// @Summary Get a group message by ID
+// @ID GetGroupMessageById
+// @Tags groupmessage
+// @Produce json
+// @Param id path string true "Message ID"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /groupmessage/{id} [get]
 func GetGroupMessageById(c *gin.Context, collection *mongo.Collection) {
 	messageIDParam := c.Param("id")
 	messageID, err := primitive.ObjectIDFromHex(messageIDParam)
@@ -79,10 +96,26 @@ func GetGroupMessageById(c *gin.Context, collection *mongo.Collection) {
 	c.JSON(http.StatusOK, message)
 }
 
+// @Summary Ping the group message service
+// @ID GetGroupMessagesPing
+// @Tags groupmessage
+// @Produce json
+// @Success 200 {object} map[string]string
+// @Router /groupmessage/ping [get]
 func GetGroupMessagesPing(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "pong"})
 }
 
+// @Summary Add a new group message
+// @ID AddGroupMessage
+// @Tags groupmessage
+// @Produce json
+// @Consume json
+// @Param message body Models.GroupMessage true "Group Message data"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /groupmessage [post]
 func AddGroupMessage(c *gin.Context, collection *mongo.Collection) {
 	var newGroupMessage Models.GroupMessage
 	if err := c.ShouldBindJSON(&newGroupMessage); err != nil {
@@ -118,6 +151,18 @@ func AddGroupMessage(c *gin.Context, collection *mongo.Collection) {
 	})
 }
 
+// @Summary Update a group message by ID
+// @ID UpdateGroupMessage
+// @Tags groupmessage
+// @Produce json
+// @Consume json
+// @Param id path string true "Message ID"
+// @Param message body Models.GroupMessage true "Group Message data"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /groupmessage/{id} [patch]
 func UpdateGroupMessage(c *gin.Context, collection *mongo.Collection) {
 	messageIDParam := c.Param("id")
 	messageID, err := primitive.ObjectIDFromHex(messageIDParam)
@@ -176,6 +221,16 @@ func UpdateGroupMessage(c *gin.Context, collection *mongo.Collection) {
 	})
 }
 
+// @Summary Delete a group message by ID
+// @ID DeleteGroupMessage
+// @Tags groupmessage
+// @Produce json
+// @Param id path string true "Message ID"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /groupmessage/{id} [delete]
 func DeleteGroupMessage(c *gin.Context, collection *mongo.Collection) {
 	messageIDParam := c.Param("id")
 	messageID, err := primitive.ObjectIDFromHex(messageIDParam)

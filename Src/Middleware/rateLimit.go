@@ -7,7 +7,7 @@ import (
 )
 
 func RateLimitMiddleware() gin.HandlerFunc {
-	limiter := rate.NewLimiter(2, 2)
+	limiter := rate.NewLimiter(10, 20)
 
 	return func(c *gin.Context) {
 		if !limiter.Allow() {
